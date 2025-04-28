@@ -17,6 +17,6 @@ public class Option
 	
 	public void render()
 	{
-		System.out.print(option + ": " + action + '\t');
+		System.out.print(option + ": " + text + '\t');
 	}
 }
