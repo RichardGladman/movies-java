@@ -1,4 +1,4 @@
-package com.thefifthcontinent.menu;
+package com.thefifthcontinent.movies.menu;
 
 import java.util.function.Function;
 
