@@ -2,14 +2,15 @@ package com.thefifthcontinent.movies.menu;
 
 import java.util.List;
 import java.util.Scanner;
+
 import java.util.ArrayList;
 
 public class Menu 
 {
-	Scanner scanner = new Scanner(System.in); 
+	private static Scanner scanner = new Scanner(System.in);
 
-	String header;
-	List<Option> options = new ArrayList<>();
+	private String header;
+	private List<Option> options = new ArrayList<>();
 	
 	public Menu(String header)
 	{

@@ -3,10 +3,46 @@
  */
 package com.thefifthcontinent.movies;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import com.thefifthcontinent.movies.menu.Menu;
+import com.thefifthcontinent.movies.menu.Option;
+import com.thefifthcontinent.movies.model.Movie;
+
 public class App 
 {
-     public static void main(String[] args) 
-     {
-        
-     }
+	private List<Movie> movies = new ArrayList<>();
+	private Scanner scanner = new Scanner(System.in);
+	
+    public static void main(String[] args) 
+    {
+    	new App().run();
+    }
+    
+    private void run()
+    {
+    	Menu menu = createMenu();
+    	char choice = '\0';
+    	
+    	do {
+			menu.render();
+			choice = menu.getChoice();
+			
+		} while (choice != 'Q');
+    }
+    
+    private Menu createMenu()
+    {
+    	Menu menu = new Menu("Main Menu");
+    	menu.addOption(new Option("Add New Movie", 'A', null));
+    	menu.addOption(new Option("Edit Movie", 'E', null));
+    	menu.addOption(new Option("Delete Movie", 'D', null));
+    	menu.addOption(new Option("Search Movies", 'S', null));
+    	menu.addOption(new Option("View Movie", 'V', null));
+    	menu.addOption(new Option("Quit", 'Q', null));
+
+    	return menu;
+    }
 }
