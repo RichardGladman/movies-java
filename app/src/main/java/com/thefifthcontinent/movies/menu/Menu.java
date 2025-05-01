@@ -31,10 +31,18 @@ public class Menu
 		}
 	}
 	
-	public char getChoice()
+	public Option getChoice()
 	{
 		System.out.print("Enter your choice: ");
 		
-		return scanner.nextLine().toUpperCase().charAt(0);
+		char choice = scanner.nextLine().toUpperCase().charAt(0);
+		
+		for (Option option: options) {
+			if (option.getOption() == choice) {
+				return option;
+			}
+		}
+		
+		return null;
 	}
 }

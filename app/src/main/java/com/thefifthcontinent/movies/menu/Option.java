@@ -1,14 +1,12 @@
 package com.thefifthcontinent.movies.menu;
 
-import java.util.function.Function;
-
 public class Option
 {
 	String text;
 	char option;
-	Function<Void, Void> action;
+	Runnable action;
 	
-	public Option(String text, char option, Function<Void, Void> action)
+	public Option(String text, char option, Runnable action)
 	{
 		this.text = text;
 		this.option = option;
@@ -19,4 +17,21 @@ public class Option
 	{
 		System.out.println(option + ": " + text);
 	}
+
+	public String getText()
+	{
+		return text;
+	}
+
+	public char getOption()
+	{
+		return option;
+	}
+
+	public Runnable getAction()
+	{
+		return action;
+	}
+	
+	
 }

@@ -24,19 +24,30 @@ public class App
     private void run()
     {
     	Menu menu = createMenu();
-    	char choice = '\0';
+    	Option choice = null;
     	
     	do {
 			menu.render();
 			choice = menu.getChoice();
 			
-		} while (choice != 'Q');
+			if (choice != null && choice.getOption() != 'Q') {
+				choice.getAction().run();
+			}
+			
+		} while (choice.getOption() != 'Q');
+    }
+    
+    private void addMovie()
+    {
+    	System.out.println("\nAdding Movie");
+    	
+    	
     }
     
     private Menu createMenu()
     {
     	Menu menu = new Menu("Main Menu");
-    	menu.addOption(new Option("Add New Movie", 'A', null));
+    	menu.addOption(new Option("Add New Movie", 'A', this::addMovie));
     	menu.addOption(new Option("Edit Movie", 'E', null));
     	menu.addOption(new Option("Delete Movie", 'D', null));
     	menu.addOption(new Option("Search Movies", 'S', null));
