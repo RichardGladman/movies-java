@@ -40,18 +40,36 @@ public class App
     private void addMovie()
     {
     	view.header("Adding Movie");
-    	
-    	
+    }
+    
+    private void editMovie()
+    {
+    	view.header("Editing Movie");
+    }
+    
+    private void deleteMovie()
+    {
+    	view.header("Deleting Movie");
+    }
+    
+    private void searchMovies()
+    {
+    	view.header("Searching Movies");
+    }
+    
+    private void viewMovie()
+    {
+    	view.header("View Movie");
     }
     
     private Menu createMenu()
     {
     	Menu menu = new Menu("Main Menu");
     	menu.addOption(new Option("Add New Movie", 'A', this::addMovie));
-    	menu.addOption(new Option("Edit Movie", 'E', null));
-    	menu.addOption(new Option("Delete Movie", 'D', null));
-    	menu.addOption(new Option("Search Movies", 'S', null));
-    	menu.addOption(new Option("View Movie", 'V', null));
+    	menu.addOption(new Option("Edit Movie", 'E', this::editMovie));
+    	menu.addOption(new Option("Delete Movie", 'D', this::deleteMovie));
+    	menu.addOption(new Option("Search Movies", 'S', this::searchMovies));
+    	menu.addOption(new Option("View Movie", 'V', this::viewMovie));
     	menu.addOption(new Option("Quit", 'Q', null));
 
     	return menu;
