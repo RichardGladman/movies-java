@@ -5,16 +5,16 @@ package com.thefifthcontinent.movies;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import com.thefifthcontinent.movies.menu.Menu;
 import com.thefifthcontinent.movies.menu.Option;
 import com.thefifthcontinent.movies.model.Movie;
+import com.thefifthcontinent.movies.view.View;
 
 public class App 
 {
 	private List<Movie> movies = new ArrayList<>();
-	private Scanner scanner = new Scanner(System.in);
+	private final View view = new View();
 	
     public static void main(String[] args) 
     {
@@ -39,7 +39,7 @@ public class App
     
     private void addMovie()
     {
-    	System.out.println("\nAdding Movie");
+    	view.header("Adding Movie");
     	
     	
     }

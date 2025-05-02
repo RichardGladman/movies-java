@@ -1,7 +1,11 @@
 package com.thefifthcontinent.movies.menu;
 
+import com.thefifthcontinent.movies.view.View;
+
 public class Option
 {
+	private final View view = new View();
+	
 	String text;
 	char option;
 	Runnable action;
@@ -15,7 +19,7 @@ public class Option
 	
 	public void render()
 	{
-		System.out.println(option + ": " + text);
+		view.printText(option + ": " + text, true);
 	}
 
 	public String getText()

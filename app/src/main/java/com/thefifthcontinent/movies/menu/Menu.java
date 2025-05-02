@@ -1,14 +1,14 @@
 package com.thefifthcontinent.movies.menu;
 
 import java.util.List;
-import java.util.Scanner;
+
+import com.thefifthcontinent.movies.view.View;
 
 import java.util.ArrayList;
 
 public class Menu 
 {
-	private static Scanner scanner = new Scanner(System.in);
-
+	private final View view = new View();
 	private String header;
 	private List<Option> options = new ArrayList<>();
 	
@@ -24,7 +24,7 @@ public class Menu
 	
 	public void render() 
 	{
-		System.out.println(header);
+		view.header(header);;
 		
 		for (Option option: options) {
 			option.render();
@@ -33,9 +33,8 @@ public class Menu
 	
 	public Option getChoice()
 	{
-		System.out.print("Enter your choice: ");
-		
-		char choice = scanner.nextLine().toUpperCase().charAt(0);
+		view.printText("Enter your choice: ");
+		char choice = view.getChar();
 		
 		for (Option option: options) {
 			if (option.getOption() == choice) {
