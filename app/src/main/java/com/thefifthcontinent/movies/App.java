@@ -3,8 +3,8 @@
  */
 package com.thefifthcontinent.movies;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.thefifthcontinent.movies.menu.Menu;
 import com.thefifthcontinent.movies.menu.Option;
@@ -13,7 +13,7 @@ import com.thefifthcontinent.movies.view.View;
 
 public class App 
 {
-	private List<Movie> movies = new ArrayList<>();
+	private Map<String, Movie> movies = new HashMap<>();
 	private final View view = new View();
 	
     public static void main(String[] args) 
@@ -40,6 +40,7 @@ public class App
     private void addMovie()
     {
     	view.header("Adding Movie");
+    	String title = view.getString("Enter Title", 2, 50);
     }
     
     private void editMovie()

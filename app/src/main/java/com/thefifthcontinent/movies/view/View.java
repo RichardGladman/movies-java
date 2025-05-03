@@ -29,4 +29,32 @@ public class View
 	{
 		return scanner.nextLine().toUpperCase().charAt(0);
 	}
+	
+	public String getString(String prompt)
+	{
+		return getString(prompt, 0, 0);
+	}
+	
+	public String getString(String prompt, int minLen, int maxLen)
+	{
+		boolean valid;
+		String input;
+		
+		do {
+			System.out.print(prompt + ": ");
+			input = scanner.nextLine();
+			
+			if (minLen > 0 && input.length() < minLen) {
+				System.out.println(ANSICodes.RED + "Error, input must be at least " + minLen + " characters long" + ANSICodes.RESET);
+				valid = false;
+			} else if (maxLen > 0 && input.length() > maxLen) {
+				System.out.println(ANSICodes.RED + "Error, input must be no more than " + maxLen + " characters long" + ANSICodes.RESET);
+				valid = false;
+			} else {
+				valid = true;
+			}
+		} while (!valid);
+		
+		return input;
+	}
 }
