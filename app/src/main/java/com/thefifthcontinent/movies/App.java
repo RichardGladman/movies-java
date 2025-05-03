@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.thefifthcontinent.movies.menu.Menu;
 import com.thefifthcontinent.movies.menu.Option;
+import com.thefifthcontinent.movies.model.Category;
 import com.thefifthcontinent.movies.model.Movie;
 import com.thefifthcontinent.movies.view.View;
 
@@ -41,6 +42,7 @@ public class App
     {
     	view.header("Adding Movie");
     	String title = view.getString("Enter Title", 2, 50);
+    	Category category = view.<Category>getValue("Enter Category", Category.class);
     }
     
     private void editMovie()

@@ -57,4 +57,24 @@ public class View
 		
 		return input;
 	}
+	
+	public <T extends Enum<T>> T getValue(String prompt, Class<T> enumType)
+	{
+		T value = null;
+		boolean valid = false;
+		
+		do {
+			String input = getString(prompt, 1, 0);
+			input = input.replaceAll(" ", "_").toUpperCase();
+			
+			try {
+				value = Enum.valueOf(enumType, input);
+				valid = true;
+			} catch(IllegalArgumentException e) {
+				System.out.println(ANSICodes.RED + "Invalid value entered" + ANSICodes.RESET);
+			}
+		} while(!valid);
+		
+		return value;
+	}
 }
