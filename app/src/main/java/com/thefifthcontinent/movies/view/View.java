@@ -58,6 +58,33 @@ public class View
 		return input;
 	}
 	
+	public int getInteger(String prompt, int min, int max)
+	{
+		int value = 0;
+		boolean valid = false;
+		
+		do {
+			String input = getString(prompt);
+			
+			try {
+				value = Integer.parseInt(input);
+				
+				if (min > 0 && value < min) {
+					System.out.println(ANSICodes.RED + "Value must be greater than " + min + ANSICodes.RESET);
+				} else if (max > 0 && value > max) {
+					System.out.println(ANSICodes.RED + "Value must be less than " + max + ANSICodes.RESET);
+				} else {
+					valid = true;
+				}
+				
+			} catch (NumberFormatException e) {
+				System.out.println(ANSICodes.RED + "Not a valid integer" + ANSICodes.RESET);
+			}
+		} while (!valid);
+		
+		return value;
+	}
+	
 	public <T extends Enum<T>> T getValue(String prompt, Class<T> enumType)
 	{
 		T value = null;

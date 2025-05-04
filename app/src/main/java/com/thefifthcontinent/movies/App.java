@@ -43,6 +43,7 @@ public class App
     	view.header("Adding Movie");
     	String title = view.getString("Enter Title", 2, 50);
     	Category category = view.<Category>getValue("Enter Category", Category.class);
+    	int runningTime = view.getInteger("Enter Running Time", 0, 0);
     }
     
     private void editMovie()
