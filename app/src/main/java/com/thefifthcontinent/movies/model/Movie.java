@@ -9,12 +9,12 @@ public class Movie
 	private int id;
 	private String title;
 	private Category category;
-	private int certificate;
+	private String certificate;
 	private int runningTime;
 	private String director;
 	private List<String> stars;
 	
-	public Movie(String title, Category category, int certificate, int runningTime)
+	public Movie(String title, Category category, String certificate, int runningTime)
 	{
 		super();
 		this.id = nextId++;
@@ -61,7 +61,7 @@ public class Movie
 		return category;
 	}
 
-	public int getCertificate()
+	public String getCertificate()
 	{
 		return certificate;
 	}

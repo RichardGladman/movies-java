@@ -8,7 +8,7 @@ public class View
 	
 	public void header(String text)
 	{
-		System.out.println(ANSICodes.BLUE + text + ANSICodes.RESET);
+		System.out.println(ANSICodes.BLUE + "\n" + text + "\n" + ANSICodes.RESET);
 	}
 	
 	public void printText(String text)

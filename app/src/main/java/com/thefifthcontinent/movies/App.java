@@ -31,7 +31,7 @@ public class App
 			menu.render();
 			choice = menu.getChoice();
 			
-			if (choice != null && choice.getOption() != 'Q') {
+			if (choice != null && choice.getAction() != null) {
 				choice.getAction().run();
 			}
 			
@@ -41,9 +41,12 @@ public class App
     private void addMovie()
     {
     	view.header("Adding Movie");
+    	
     	String title = view.getString("Enter Title", 2, 50);
     	Category category = view.<Category>getValue("Enter Category", Category.class);
+    	String certificate = view.getString("Enter Certificate", 1, 5);
     	int runningTime = view.getInteger("Enter Running Time", 0, 0);
+    	String director = view.getString("Enter Director", 2, 50);
     }
     
     private void editMovie()
