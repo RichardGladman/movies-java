@@ -44,6 +44,8 @@ public class MovieController
     	addStars(movie);
     	
     	App.getMovies().put(title, movie);
+    	
+    	view.success(title + " added successfully");
     	dataChanged = true;
     }
     
