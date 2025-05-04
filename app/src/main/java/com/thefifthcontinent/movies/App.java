@@ -9,14 +9,15 @@ import java.util.Map;
 import com.thefifthcontinent.movies.menu.Menu;
 import com.thefifthcontinent.movies.menu.Option;
 import com.thefifthcontinent.movies.model.Category;
-import com.thefifthcontinent.movies.model.Director;
 import com.thefifthcontinent.movies.model.Movie;
 import com.thefifthcontinent.movies.view.View;
 
 public class App 
 {
-	private Map<String, Movie> movies = new HashMap<>();
+	private final Map<String, Movie> movies = new HashMap<>();
 	private final View view = new View();
+	
+	private boolean dataChanged;
 	
     public static void main(String[] args) 
     {
@@ -49,7 +50,12 @@ public class App
     	int runningTime = view.getInteger("Enter Running Time", 0, 0);
     	String directorName = view.getString("Enter Director", 2, 50);
     	
-    	Director director = new Director(directorName);
+    	Movie movie = new Movie(title, category, certificate, runningTime);
+    	movie.addDirector(directorName);
+    	addStars(movie);
+    	
+    	movies.put(title, movie);
+    	dataChanged = true;
     }
     
     private void editMovie()
@@ -70,6 +76,19 @@ public class App
     private void viewMovie()
     {
     	view.header("View Movie");
+    }
+    
+    private void addStars(Movie movie)
+    {
+    	String input = null;
+    	
+    	do {
+    		input = view.getString("Enter Actor (Blank to finish)");
+    		
+    		if (input != "") {
+    			movie.addStar(input);
+    		}
+    	} while (input != "");
     }
     
     private Menu createMenu()
