@@ -13,7 +13,7 @@ public class Movie
 	private String certificate;
 	private int runningTime;
 	private Director director;
-	private List<String> stars;
+	private List<Actor> stars;
 	
 	public Movie(String title, Category category, String certificate, int runningTime)
 	{
@@ -32,16 +32,16 @@ public class Movie
 		this.director = new Director(name);
 	}
 	
-	public void addStar(String star)
+	public void addStar(String name)
 	{
-		for (String s: stars)
+		for (Actor actor: stars)
 		{
-			if (s.equalsIgnoreCase(star)) {
+			if (actor.getName().equalsIgnoreCase(name)) {
 				return;
 			}
 		}
 		
-		stars.add(star);
+		stars.add(new Actor(name));
 	}
 
 	public static int getNextId()
@@ -79,7 +79,7 @@ public class Movie
 		return director;
 	}
 
-	public List<String> getStars()
+	public List<Actor> getStars()
 	{
 		return stars;
 	}
