@@ -4,8 +4,6 @@ import com.thefifthcontinent.movies.App;
 import com.thefifthcontinent.movies.menu.Menu;
 import com.thefifthcontinent.movies.menu.Option;
 import com.thefifthcontinent.movies.model.Actor;
-import com.thefifthcontinent.movies.model.Category;
-import com.thefifthcontinent.movies.model.Movie;
 import com.thefifthcontinent.movies.view.View;
 
 public class ActorController
@@ -36,7 +34,7 @@ public class ActorController
     	String name = view.getString("Enter Name", 2, 50);
     	
     	Actor actor = new Actor(name);
-    	App.getActors().put(name, actor);
+    	App.getActors().put(name.toLowerCase(), actor);
     	
     	view.success(name + " saved successfully");
     	dataChanged = true;

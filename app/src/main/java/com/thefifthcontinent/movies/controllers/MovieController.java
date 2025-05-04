@@ -3,6 +3,7 @@ package com.thefifthcontinent.movies.controllers;
 import com.thefifthcontinent.movies.App;
 import com.thefifthcontinent.movies.menu.Menu;
 import com.thefifthcontinent.movies.menu.Option;
+import com.thefifthcontinent.movies.model.Actor;
 import com.thefifthcontinent.movies.model.Category;
 import com.thefifthcontinent.movies.model.Movie;
 import com.thefifthcontinent.movies.view.View;
@@ -74,7 +75,12 @@ public class MovieController
     		input = view.getString("Enter Actor (Blank to finish)");
     		
     		if (input != "") {
-    			movie.addStar(input);
+    			Actor actor = App.getActors().get(input.toLowerCase());
+    			if (actor == null) {
+    				view.error("That actor does not exist");
+    			} else {
+    				movie.addStar(actor);
+    			}
     		}
     	} while (input != "");
     }

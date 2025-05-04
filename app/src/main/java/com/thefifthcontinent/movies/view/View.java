@@ -16,6 +16,11 @@ public class View
 		System.out.println(ANSICodes.GREEN + text + ANSICodes.RESET);
 	}
 	
+	public void error(String text)
+	{
+		System.out.println(ANSICodes.RED + text + ANSICodes.RESET);
+	}
+	
 	public void printText(String text)
 	{
 		printText(text, false);

@@ -32,16 +32,9 @@ public class Movie
 		this.director = new Director(name);
 	}
 	
-	public void addStar(String name)
+	public void addStar(Actor actor)
 	{
-		for (Actor actor: stars)
-		{
-			if (actor.getName().equalsIgnoreCase(name)) {
-				return;
-			}
-		}
-		
-		stars.add(new Actor(name));
+		stars.add(actor);
 	}
 
 	public static int getNextId()
