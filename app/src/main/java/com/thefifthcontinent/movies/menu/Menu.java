@@ -42,6 +42,6 @@ public class Menu
 			}
 		}
 		
-		return null;
+		return new Option(null, choice, null);
 	}
 }
