@@ -1,5 +1,6 @@
 package com.thefifthcontinent.movies.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Movie
@@ -11,7 +12,7 @@ public class Movie
 	private Category category;
 	private String certificate;
 	private int runningTime;
-	private String director;
+	private Director director;
 	private List<String> stars;
 	
 	public Movie(String title, Category category, String certificate, int runningTime)
@@ -22,11 +23,13 @@ public class Movie
 		this.category = category;
 		this.certificate = certificate;
 		this.runningTime = runningTime;
+		this.director = null;
+		this.stars = new ArrayList<>();
 	}
 	
-	public void addDirector(String director)
+	public void addDirector(String name)
 	{
-		this.director = director;
+		this.director = new Director(name);
 	}
 	
 	public void addStar(String star)
@@ -71,7 +74,7 @@ public class Movie
 		return runningTime;
 	}
 
-	public String getDirector()
+	public Director getDirector()
 	{
 		return director;
 	}

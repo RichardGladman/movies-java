@@ -1,0 +1,19 @@
+package com.thefifthcontinent.movies.model;
+
+public class Director
+{
+	private String name;
+
+	public Director(String name)
+	{
+		super();
+		this.name = name;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+	
+	
+}

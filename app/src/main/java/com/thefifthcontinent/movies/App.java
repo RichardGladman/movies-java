@@ -9,6 +9,7 @@ import java.util.Map;
 import com.thefifthcontinent.movies.menu.Menu;
 import com.thefifthcontinent.movies.menu.Option;
 import com.thefifthcontinent.movies.model.Category;
+import com.thefifthcontinent.movies.model.Director;
 import com.thefifthcontinent.movies.model.Movie;
 import com.thefifthcontinent.movies.view.View;
 
@@ -46,7 +47,9 @@ public class App
     	Category category = view.<Category>getValue("Enter Category", Category.class);
     	String certificate = view.getString("Enter Certificate", 1, 5);
     	int runningTime = view.getInteger("Enter Running Time", 0, 0);
-    	String director = view.getString("Enter Director", 2, 50);
+    	String directorName = view.getString("Enter Director", 2, 50);
+    	
+    	Director director = new Director(directorName);
     }
     
     private void editMovie()
