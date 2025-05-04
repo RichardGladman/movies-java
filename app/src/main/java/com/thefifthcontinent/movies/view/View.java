@@ -11,6 +11,11 @@ public class View
 		System.out.println(ANSICodes.BLUE + "\n" + text + "\n" + ANSICodes.RESET);
 	}
 	
+	public void success(String text)
+	{
+		System.out.println(ANSICodes.GREEN + text + ANSICodes.RESET);
+	}
+	
 	public void printText(String text)
 	{
 		printText(text, false);
