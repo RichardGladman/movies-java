@@ -34,7 +34,7 @@ public class FileHandler
 	   	}
 			
 		
-	   	try (BufferedWriter writer = new BufferedWriter(new FileWriter(directory + filename, true))) {
+	   	try (BufferedWriter writer = new BufferedWriter(new FileWriter(directory + filename, false))) {
 	   		for (Actor actor: actors.values()) {
 				String data = "ACTOR::" + actor.getName() + "\n";
 				writer.write(data);
