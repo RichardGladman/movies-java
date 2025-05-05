@@ -12,7 +12,7 @@ public class Movie
 	private Category category;
 	private String certificate;
 	private int runningTime;
-	private Director director;
+	private List<Director> directors;
 	private List<Actor> stars;
 	
 	public Movie(String title, Category category, String certificate, int runningTime)
@@ -23,13 +23,13 @@ public class Movie
 		this.category = category;
 		this.certificate = certificate;
 		this.runningTime = runningTime;
-		this.director = null;
+		this.directors = new ArrayList<>();
 		this.stars = new ArrayList<>();
 	}
 	
-	public void addDirector(String name)
+	public void addDirector(Director director)
 	{
-		this.director = new Director(name);
+		directors.add(director);
 	}
 	
 	public void addStar(Actor actor)
@@ -67,9 +67,9 @@ public class Movie
 		return runningTime;
 	}
 
-	public Director getDirector()
+	public List<Director> getDirector()
 	{
-		return director;
+		return directors;
 	}
 
 	public List<Actor> getStars()

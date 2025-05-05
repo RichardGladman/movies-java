@@ -5,6 +5,7 @@ import com.thefifthcontinent.movies.menu.Menu;
 import com.thefifthcontinent.movies.menu.Option;
 import com.thefifthcontinent.movies.model.Actor;
 import com.thefifthcontinent.movies.model.Category;
+import com.thefifthcontinent.movies.model.Director;
 import com.thefifthcontinent.movies.model.Movie;
 import com.thefifthcontinent.movies.view.View;
 
@@ -37,10 +38,9 @@ public class MovieController
     	Category category = view.<Category>getValue("Enter Category", Category.class);
     	String certificate = view.getString("Enter Certificate", 1, 5);
     	int runningTime = view.getInteger("Enter Running Time", 0, 0);
-    	String directorName = view.getString("Enter Director", 2, 50);
     	
     	Movie movie = new Movie(title, category, certificate, runningTime);
-    	movie.addDirector(directorName);
+    	addDirectors(movie);
     	addStars(movie);
     	
     	App.getMovies().put(title, movie);
@@ -67,6 +67,24 @@ public class MovieController
     private void viewMovie()
     {
     	view.header("View Movie");
+    }
+    
+    private void addDirectors(Movie movie)
+    {
+    	String input = null;
+    	
+    	do {
+    		input = view.getString("Enter Director (Blank to finish)");
+    		
+    		if (input != "") {
+    			Director director = App.getDirectors().get(input.toLowerCase());
+    			if (director == null) {
+    				view.error("That director does not exist");
+    			} else {
+    				movie.addDirector(director);
+    			}
+    		}
+    	} while (input != "");
     }
     
     private void addStars(Movie movie)
