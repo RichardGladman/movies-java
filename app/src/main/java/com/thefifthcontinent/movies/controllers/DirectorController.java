@@ -27,6 +27,11 @@ public class DirectorController
 		} while (choice.getOption() != 'B');
     }
     
+    public boolean getDataChanged()
+    {
+    	return dataChanged;
+    }
+   
     private void add()
     {
     	view.header("Adding Director");

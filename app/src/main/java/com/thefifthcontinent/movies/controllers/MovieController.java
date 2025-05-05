@@ -30,6 +30,11 @@ public class MovieController
 		} while (choice.getOption() != 'B');
     }
     
+    public boolean getDataChanged()
+    {
+    	return dataChanged;
+    }
+    
     private void addMovie()
     {
     	view.header("Adding Movie");

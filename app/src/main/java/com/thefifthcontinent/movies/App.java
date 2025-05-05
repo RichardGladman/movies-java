@@ -1,5 +1,10 @@
 package com.thefifthcontinent.movies;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,12 +16,19 @@ import com.thefifthcontinent.movies.menu.Option;
 import com.thefifthcontinent.movies.model.Actor;
 import com.thefifthcontinent.movies.model.Director;
 import com.thefifthcontinent.movies.model.Movie;
+import com.thefifthcontinent.movies.view.View;
 
 public class App 
 {
 	private static final Map<String, Movie> movies = new HashMap<>();
 	private static final Map<String, Actor> actors = new HashMap<>();
 	private static final Map<String, Director> directors = new HashMap<>();
+	
+	private final View view = new View();
+	
+	private ActorController actorController = new ActorController();
+	private DirectorController directorController = new DirectorController();
+	private MovieController movieController = new MovieController();
 	
 	public static Map<String, Movie> getMovies()
 	{
@@ -52,21 +64,74 @@ public class App
 			}
 			
 		} while (choice.getOption() != 'Q');
+    	
+    	saveData();
+    	
     }
     
     private void manageMovies()
     {
-    	new MovieController().run();
+    	movieController.run();
     }
     
     private void manageActors()
     {
-    	new ActorController().run();
+    	actorController.run();
     }
     
     private void manageDirectors()
     {
-    	new DirectorController().run();
+    	directorController.run();
+    }
+    
+    private void saveData()
+    {
+    	if (!movieController.getDataChanged() && !actorController.getDataChanged() && !directorController.getDataChanged()) {
+    		return;
+    	}
+    	
+    	String directoryName = System.getProperty("user.home") + "/Documents/movies";
+    	String fileName = directoryName + "/movies.txt";
+    	
+    	try {
+    		Files.createDirectories(Paths.get(directoryName));
+    	} catch (IOException e) {
+    		view.error("Failed to create directories");
+    		return;
+    	}
+    	
+    	try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
+    		for (Actor actor: actors.values()) {
+    			String data = "ACTOR::" + actor.getName() + "\n";
+    			writer.write(data);
+    		}
+
+    		for (Director director: directors.values()) {
+    			String data = "DIRECTOR::" + director.getName() + "\n";
+    			writer.write(data);
+    		}
+
+    		for (Movie movie: movies.values()) {
+    			String data = "MOVIE::" + movie.getId() + "," +
+    									movie.getTitle() + "," +
+    									movie.getCategory() + "," +
+    									movie.getCertificate() + "," +
+    									movie.getRunningTime() + "\n";
+    			writer.write(data);
+    			
+        		for (Actor actor: movie.getStars()) {
+        			data = "MOVIEACTOR::" + actor.getName() + "\n";
+        			writer.write(data);
+        		}
+
+        		for (Director director: movie.getDirectors()) {
+        			data = "MOVIEDIRECTOR::" + director.getName() + "\n";
+        			writer.write(data);
+        		}
+    		}
+} catch (IOException e) {
+    		view.error("Failed to write data");
+    	}
     }
      
     private Menu createMenu()

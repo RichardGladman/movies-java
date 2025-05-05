@@ -27,6 +27,11 @@ public class ActorController
 		} while (choice.getOption() != 'B');
     }
     
+    public boolean getDataChanged()
+    {
+    	return dataChanged;
+    }
+    
     private void addActor()
     {
     	view.header("Adding Actor");

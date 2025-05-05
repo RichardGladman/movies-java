@@ -67,7 +67,7 @@ public class Movie
 		return runningTime;
 	}
 
-	public List<Director> getDirector()
+	public List<Director> getDirectors()
 	{
 		return directors;
 	}
