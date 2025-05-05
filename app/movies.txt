@@ -1,0 +1,8 @@
+ACTOR::Mark Hamill
+MOVIE::1,Star Wars,SCI_FI,12,103
+MOVIEACTOR::Mark Hamill
+ACTOR::Mark Hamill
+DIRECTOR::George Lucas
+MOVIE::1,Start Wars,SCI_FI,12,102
+MOVIEACTOR::Mark Hamill
+MOVIEDIRECTOR::George Lucas
