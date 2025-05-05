@@ -48,6 +48,8 @@ public class App
     
     private void run()
     {
+    	loadData();
+    	
     	Menu menu = createMenu();
     	Option choice = null;
     	
@@ -78,6 +80,19 @@ public class App
     private void manageDirectors()
     {
     	directorController.run();
+    }
+    
+    private boolean loadData()
+    {
+    	FileHandler fHandler = new FileHandler(System.getProperty("user.home") + "/Documents/movies/", "movies.txt");
+    	
+    	try {
+    		fHandler.loadData(actors, directors, movies);
+    		return true;
+    	} catch(RuntimeException e) {
+    		view.error("Failed to load data");
+    		return false;
+    	}
     }
     
     private void saveData()
