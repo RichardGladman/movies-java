@@ -63,8 +63,13 @@ public class App
 			
 		} while (choice.getOption() != 'Q');
     	
-    	saveData();
-    	
+       	if (movieController.getDataChanged() || actorController.getDataChanged() || directorController.getDataChanged()) {
+    		view.printText("Data has been modified, would you like to save the changes? ");
+        	char answer = view.getChar();
+        	if (answer == 'Y') {
+        		saveData();
+        	}
+    	}
     }
     
     private void manageMovies()
@@ -97,11 +102,7 @@ public class App
     
     private void saveData()
     {
-    	if (!movieController.getDataChanged() && !actorController.getDataChanged() && !directorController.getDataChanged()) {
-    		return;
-    	}
-    	
-    	FileHandler fHandler = new FileHandler(System.getProperty("user.home") + "/Documents/movies/", "movies.txt");
+     	FileHandler fHandler = new FileHandler(System.getProperty("user.home") + "/Documents/movies/", "movies.txt");
     	
     	try {
     		fHandler.saveData(actors, directors, movies);
