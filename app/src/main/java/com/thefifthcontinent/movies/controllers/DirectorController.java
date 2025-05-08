@@ -45,11 +45,33 @@ public class DirectorController
     	dataChanged = true;
     }
     
+   private void edit()
+   {
+   	view.header("Edit Director");
+   	
+   	String name = view.getString("Select Director", 2, 50);
+   	
+   	Director director = App.getDirectors().get(name.toLowerCase());
+   	if (director == null) {
+   		view.error("Director not found");
+   		return;
+   	}
+   	
+   	App.getDirectors().remove(name.toLowerCase());
+   	
+   	director.setName(view.getString("Enter Name", 0, 50, director.getName()));
+   	
+   	App.getDirectors().put(director.getName().toLowerCase(), director);
+   	
+   	view.success(director.getName() + "Saved Successfully");
+   	dataChanged = true;
+   }
+   
     private Menu createMenu()
     {
     	Menu menu = new Menu("Manage Directors");
     	menu.addOption(new Option("Add New Director", 'A', this::add));
-    	menu.addOption(new Option("Edit Director", 'E', null));
+    	menu.addOption(new Option("Edit Director", 'E', this::edit));
     	menu.addOption(new Option("Delete Director", 'D', null));
     	menu.addOption(new Option("Search Directors", 'S', null));
     	menu.addOption(new Option("View Director", 'V', null));
