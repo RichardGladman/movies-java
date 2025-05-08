@@ -39,7 +39,7 @@ public class View
 	{
 		return scanner.nextLine().toUpperCase().charAt(0);
 	}
-	
+
 	public String getString(String prompt)
 	{
 		return getString(prompt, 0, 0);
@@ -47,8 +47,17 @@ public class View
 	
 	public String getString(String prompt, int minLen, int maxLen)
 	{
+		return getString(prompt, minLen, maxLen, null);
+	}
+	
+	public String getString(String prompt, int minLen, int maxLen, String current)
+	{
 		boolean valid;
 		String input;
+		
+		if (current != null) {
+			prompt += " (" + current + ")";
+		}
 		
 		do {
 			System.out.print(prompt + ": ");
@@ -64,6 +73,10 @@ public class View
 				valid = true;
 			}
 		} while (!valid);
+		
+		if (input.length() == 0 && current != null) {
+			return current;
+		}
 		
 		return input;
 	}

@@ -45,14 +45,35 @@ public class ActorController
     	dataChanged = true;
     }
     
+    private void editActor()
+    {
+    	view.header("Edit Actor");
+    	
+    	String name = view.getString("Select Actor", 2, 50);
+    	
+    	Actor actor = App.getActors().get(name.toLowerCase());
+    	if (actor == null) {
+    		view.error("Actor not found");
+    		return;
+    	}
+    	
+    	App.getActors().remove(name.toLowerCase());
+    	
+    	actor.setName(view.getString("Enter Name", 0, 50, actor.getName()));
+    	
+    	App.getActors().put(actor.getName().toLowerCase(), actor);
+    	
+    	view.success(actor.getName() + " saved successfully");
+    	dataChanged = true;
+    }
+    
     private Menu createMenu()
     {
     	Menu menu = new Menu("Manage Actors");
     	menu.addOption(new Option("Add New Actor", 'A', this::addActor));
-    	menu.addOption(new Option("Edit Actor", 'E', null));
+    	menu.addOption(new Option("Edit Actor", 'E', this::editActor));
     	menu.addOption(new Option("Delete Actor", 'D', null));
     	menu.addOption(new Option("Search Actors", 'S', null));
-    	menu.addOption(new Option("View Actor", 'V', null));
     	menu.addOption(new Option("Back to Main", 'B', null));
 
     	return menu;
