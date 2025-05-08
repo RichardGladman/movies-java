@@ -7,35 +7,10 @@ import com.thefifthcontinent.movies.model.Actor;
 import com.thefifthcontinent.movies.model.Category;
 import com.thefifthcontinent.movies.model.Director;
 import com.thefifthcontinent.movies.model.Movie;
-import com.thefifthcontinent.movies.view.View;
 
-public class MovieController 
+public class MovieController extends Controller
 {
-	private final View view = new View();
-	private boolean dataChanged;
-    
-    public void run()
-    {
-    	Menu menu = createMenu();
-    	Option choice = null;
-    	
-    	do {
-			menu.render();
-			choice = menu.getChoice();
-			
-			if (choice != null && choice.getAction() != null) {
-				choice.getAction().run();
-			}
-			
-		} while (choice.getOption() != 'B');
-    }
-    
-    public boolean getDataChanged()
-    {
-    	return dataChanged;
-    }
-    
-    private void addMovie()
+	protected void add()
     {
     	view.header("Adding Movie");
     	
@@ -54,24 +29,19 @@ public class MovieController
     	dataChanged = true;
     }
     
-    private void editMovie()
+	protected void edit()
     {
     	view.header("Editing Movie");
     }
     
-    private void deleteMovie()
+	protected void delete()
     {
     	view.header("Deleting Movie");
     }
     
-    private void searchMovies()
+	protected void search()
     {
     	view.header("Searching Movies");
-    }
-    
-    private void viewMovie()
-    {
-    	view.header("View Movie");
     }
     
     private void addDirectors(Movie movie)
@@ -110,14 +80,13 @@ public class MovieController
     	} while (input != "");
     }
     
-    private Menu createMenu()
+    protected Menu createMenu()
     {
     	Menu menu = new Menu("Manage Movies");
-    	menu.addOption(new Option("Add New Movie", 'A', this::addMovie));
-    	menu.addOption(new Option("Edit Movie", 'E', this::editMovie));
-    	menu.addOption(new Option("Delete Movie", 'D', this::deleteMovie));
-    	menu.addOption(new Option("Search Movies", 'S', this::searchMovies));
-    	menu.addOption(new Option("View Movie", 'V', this::viewMovie));
+    	menu.addOption(new Option("Add New Movie", 'A', this::add));
+    	menu.addOption(new Option("Edit Movie", 'E', this::edit));
+    	menu.addOption(new Option("Delete Movie", 'D', this::delete));
+    	menu.addOption(new Option("Search Movies", 'S', this::search));
     	menu.addOption(new Option("Back to Main", 'B', null));
 
     	return menu;

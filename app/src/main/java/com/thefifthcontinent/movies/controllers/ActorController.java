@@ -6,33 +6,9 @@ import com.thefifthcontinent.movies.menu.Option;
 import com.thefifthcontinent.movies.model.Actor;
 import com.thefifthcontinent.movies.view.View;
 
-public class ActorController
+public class ActorController extends Controller
 {
-	private final View view = new View();
-	private boolean dataChanged;
-    
-    public void run()
-    {
-    	Menu menu = createMenu();
-    	Option choice = null;
-    	
-    	do {
-			menu.render();
-			choice = menu.getChoice();
-			
-			if (choice != null && choice.getAction() != null) {
-				choice.getAction().run();
-			}
-			
-		} while (choice.getOption() != 'B');
-    }
-    
-    public boolean getDataChanged()
-    {
-    	return dataChanged;
-    }
-    
-    private void addActor()
+	protected void add()
     {
     	view.header("Adding Actor");
     	
@@ -45,7 +21,7 @@ public class ActorController
     	dataChanged = true;
     }
     
-    private void editActor()
+    protected void edit()
     {
     	view.header("Edit Actor");
     	
@@ -67,13 +43,23 @@ public class ActorController
     	dataChanged = true;
     }
     
-    private Menu createMenu()
+    protected void delete()
+    {
+    	view.header("Delete Actor");
+    }
+    
+    protected void search()
+    {
+    	view.header("Search Actor");
+    }
+    
+    protected Menu createMenu()
     {
     	Menu menu = new Menu("Manage Actors");
-    	menu.addOption(new Option("Add New Actor", 'A', this::addActor));
-    	menu.addOption(new Option("Edit Actor", 'E', this::editActor));
-    	menu.addOption(new Option("Delete Actor", 'D', null));
-    	menu.addOption(new Option("Search Actors", 'S', null));
+    	menu.addOption(new Option("Add New Actor", 'A', this::add));
+    	menu.addOption(new Option("Edit Actor", 'E', this::edit));
+    	menu.addOption(new Option("Delete Actor", 'D', this::delete));
+    	menu.addOption(new Option("Search Actors", 'S', this::search));
     	menu.addOption(new Option("Back to Main", 'B', null));
 
     	return menu;
