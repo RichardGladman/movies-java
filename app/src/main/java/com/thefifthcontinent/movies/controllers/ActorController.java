@@ -4,7 +4,6 @@ import com.thefifthcontinent.movies.App;
 import com.thefifthcontinent.movies.menu.Menu;
 import com.thefifthcontinent.movies.menu.Option;
 import com.thefifthcontinent.movies.model.Actor;
-import com.thefifthcontinent.movies.view.View;
 
 public class ActorController extends Controller
 {
@@ -64,6 +63,19 @@ public class ActorController extends Controller
     protected void search()
     {
     	view.header("Search Actor");
+    	
+    	String criteria = view.getString("Enter Search Criteria (Enter For All)", 0, 50);
+    	
+    	view.printText("-".repeat(60), true);
+    	view.printText("Actors matching: " + (criteria.equals("") ? "All" : criteria), true);
+    	view.printText("-".repeat(60), true);
+    	
+    	App.getActors().values().stream()
+    					.filter((v) -> v.getName().toLowerCase().startsWith(criteria))
+    					.forEach(a -> view.printText(a.getName(), true));
+
+    	view.printText("-".repeat(60), true);
+
     }
     
     protected Menu createMenu()

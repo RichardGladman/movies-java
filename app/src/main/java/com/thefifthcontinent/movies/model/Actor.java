@@ -19,4 +19,10 @@ public class Actor
 	{
 		this.name = name;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return name;
+	}
 }
