@@ -63,6 +63,18 @@ public class DirectorController extends Controller
 	protected void search()
 	{
 		view.header("Searching Directors");
+    	
+    	String criteria = view.getString("Enter Search Criteria (Enter For All)", 0, 50);
+    	
+    	view.printText("-".repeat(60), true);
+    	view.printText("Directors matching: " + (criteria.equals("") ? "All" : criteria), true);
+    	view.printText("-".repeat(60), true);
+    	
+    	App.getDirectors().values().stream()
+    					.filter((v) -> v.getName().toLowerCase().startsWith(criteria))
+    					.forEach(d -> view.printText(d.getName(), true));
+
+    	view.printText("-".repeat(60), true);
 	}
    
 	protected Menu createMenu()
