@@ -46,6 +46,19 @@ public class ActorController extends Controller
     protected void delete()
     {
     	view.header("Delete Actor");
+    	
+    	String name = view.getString("Select Actor", 2, 50);
+    	
+    	Actor actor = App.getActors().get(name.toLowerCase());
+    	if (actor == null) {
+    		view.error("Actor not found");
+    		return;
+    	}
+    	
+    	App.getActors().remove(name.toLowerCase());
+    	
+    	view.success(actor.getName() + " deleted");
+    	dataChanged = true;
     }
     
     protected void search()
