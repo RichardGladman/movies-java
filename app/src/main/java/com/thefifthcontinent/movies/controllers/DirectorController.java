@@ -4,7 +4,6 @@ import com.thefifthcontinent.movies.App;
 import com.thefifthcontinent.movies.menu.Menu;
 import com.thefifthcontinent.movies.menu.Option;
 import com.thefifthcontinent.movies.model.Director;
-import com.thefifthcontinent.movies.view.View;
 
 public class DirectorController extends Controller
 {
@@ -46,6 +45,19 @@ public class DirectorController extends Controller
 	protected void delete()
 	{
 		view.header("Deleting Director");
+
+		String name = view.getString("Select Director", 2, 50);
+		
+		Director director = App.getDirectors().get(name.toLowerCase());
+		if (director == null) {
+			view.error("Director not found");
+			return;
+		}
+		
+		App.getDirectors().remove(name.toLowerCase());
+		
+		view.success(director.getName() + " deleted");
+		dataChanged = true;
 	}
 	
 	protected void search()

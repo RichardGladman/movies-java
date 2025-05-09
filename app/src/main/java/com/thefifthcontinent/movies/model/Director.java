@@ -19,4 +19,10 @@ public class Director
 	{
 		this.name = name;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return name;
+	}
 }
