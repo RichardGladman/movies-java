@@ -23,7 +23,7 @@ public class MovieController extends Controller
     	addDirectors(movie);
     	addStars(movie);
     	
-    	App.getMovies().put(title, movie);
+    	App.getMovies().put(title.toLowerCase(), movie);
     	
     	view.success(title + " added successfully");
     	dataChanged = true;
@@ -37,6 +37,19 @@ public class MovieController extends Controller
 	protected void delete()
     {
     	view.header("Deleting Movie");
+    	
+    	String title = view.getString("Select Movie", 2, 50);
+    	
+    	Movie movie = App.getMovies().get(title.toLowerCase());
+    	if (movie == null) {
+    		view.error("Movie not found");
+    		return;
+    	}
+    	
+    	App.getMovies().remove(title.toLowerCase());
+    	
+    	view.success(movie.getTitle() + " deleted");
+    	dataChanged = true;
     }
     
 	protected void search()
