@@ -55,6 +55,18 @@ public class MovieController extends Controller
 	protected void search()
     {
     	view.header("Searching Movies");
+    	
+    	String criteria = view.getString("Enter Search Criteria (Enter For All)", 0, 50);
+    	
+    	view.printText("-".repeat(80), true);
+    	view.printText("Movies matching: " + (criteria.equals("") ? "All" : criteria), true);
+    	view.printText("-".repeat(80), true);
+    	
+    	App.getMovies().values().stream()
+    					.filter((v) -> v.getTitle().toLowerCase().startsWith(criteria))
+    					.forEach(m -> view.printText(m.toString(), true));
+
+    	view.printText("-".repeat(80), true);
     }
     
     private void addDirectors(Movie movie)

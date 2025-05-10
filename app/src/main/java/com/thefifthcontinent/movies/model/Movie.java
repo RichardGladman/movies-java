@@ -76,4 +76,26 @@ public class Movie
 	{
 		return stars;
 	}
+	
+	@Override
+	public String toString()
+	{
+		String data = "%-50s %-10s %-4s %d".formatted(title, category, certificate, runningTime);
+
+		if (stars.size() > 0) {
+			data += "\nActors:\n";
+			for (Actor a: stars) {
+				data += a.getName() + "\n";
+			}
+		}
+		
+		if (directors.size() > 0) {
+			data += "Directors:\n";
+			for (Director d: directors) {
+				data += d.getName() + "\n";
+			}
+		}
+		
+		return data;
+	}
 }
