@@ -67,6 +67,36 @@ public class Movie
 		return runningTime;
 	}
 
+	public void setTitle(String title)
+	{
+		this.title = title;
+	}
+
+	public void setCategory(Category category)
+	{
+		this.category = category;
+	}
+
+	public void setCertificate(String certificate)
+	{
+		this.certificate = certificate;
+	}
+
+	public void setRunningTime(int runningTime)
+	{
+		this.runningTime = runningTime;
+	}
+
+	public void setDirectors(List<Director> directors)
+	{
+		this.directors = directors;
+	}
+
+	public void setStars(List<Actor> stars)
+	{
+		this.stars = stars;
+	}
+
 	public List<Director> getDirectors()
 	{
 		return directors;

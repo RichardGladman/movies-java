@@ -32,6 +32,26 @@ public class MovieController extends Controller
 	protected void edit()
     {
     	view.header("Editing Movie");
+
+    	String title = view.getString("Select Movie", 2, 50);
+    	
+    	Movie movie = App.getMovies().get(title.toLowerCase());
+    	if (movie == null) {
+    		view.error("Movie not found");
+    		return;
+    	}
+
+    	title = view.getString("Enter Title", 2, 50, movie.getTitle());
+    	Category category = view.<Category>getValue("Enter Category", movie.getCategory(), Category.class);
+    	String certificate = view.getString("Enter Certificate", 1, 5, movie.getCertificate());
+    	int runningTime = view.getInteger("Enter Running Time", 0, 0, movie.getRunningTime());
+    	
+    	movie.setTitle(title);
+    	movie.setCategory(category);
+    	movie.setCertificate(certificate);
+    	movie.setRunningTime(runningTime);
+    	
+    	
     }
     
 	protected void delete()

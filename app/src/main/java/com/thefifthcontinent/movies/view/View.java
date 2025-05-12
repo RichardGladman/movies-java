@@ -80,14 +80,20 @@ public class View
 		
 		return input;
 	}
-	
 	public int getInteger(String prompt, int min, int max)
+	{
+		return getInteger(prompt, min, max, null);
+	}
+	
+	public int getInteger(String prompt, int min, int max, Integer previous)
 	{
 		int value = 0;
 		boolean valid = false;
 		
 		do {
 			String input = getString(prompt);
+			
+			if (previous != null && input.length() == 0) return previous;
 			
 			try {
 				value = Integer.parseInt(input);
@@ -107,14 +113,22 @@ public class View
 		
 		return value;
 	}
+
+	public <T extends Enum<T>> T getValue(String prompt, Class <T> enumType)
+	{
+		return getValue(prompt, null, enumType);
+	}
 	
-	public <T extends Enum<T>> T getValue(String prompt, Class<T> enumType)
+	public <T extends Enum<T>> T getValue(String prompt, T previous, Class <T> enumType)
 	{
 		T value = null;
 		boolean valid = false;
 		
 		do {
-			String input = getString(prompt, 1, 0);
+			String input = getString(prompt);
+			
+			if (previous != null & input.length() == 0) return previous;
+			
 			input = input.replaceAll(" ", "_").toUpperCase();
 			
 			try {
