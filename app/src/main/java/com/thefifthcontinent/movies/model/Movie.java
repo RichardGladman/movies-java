@@ -32,9 +32,19 @@ public class Movie
 		directors.add(director);
 	}
 	
+	public void removeDirector(Director director)
+	{
+		directors.remove(director);
+	}
+	
 	public void addStar(Actor actor)
 	{
 		stars.add(actor);
+	}
+	
+	public void removeStar(Actor actor)
+	{
+		stars.remove(actor);
 	}
 
 	public static int getNextId()

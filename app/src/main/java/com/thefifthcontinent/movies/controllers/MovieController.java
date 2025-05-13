@@ -41,9 +41,9 @@ public class MovieController extends Controller
     		return;
     	}
 
-    	title = view.getString("Enter Title", 2, 50, movie.getTitle());
+    	title = view.getString("Enter Title", 0, 50, movie.getTitle());
     	Category category = view.<Category>getValue("Enter Category", movie.getCategory(), Category.class);
-    	String certificate = view.getString("Enter Certificate", 1, 5, movie.getCertificate());
+    	String certificate = view.getString("Enter Certificate", 0, 5, movie.getCertificate());
     	int runningTime = view.getInteger("Enter Running Time", 0, 0, movie.getRunningTime());
     	
     	movie.setTitle(title);
@@ -51,7 +51,17 @@ public class MovieController extends Controller
     	movie.setCertificate(certificate);
     	movie.setRunningTime(runningTime);
     	
+    	view.printText("Adding new directors", true);
+    	addDirectors(movie);
+    	view.printText("Removing directors", true);
+    	removeDirectors(movie);
     	
+    	view.printText("Adding new actors", true);
+    	addStars(movie);
+    	view.printText("Removing actors", true);
+    	removeStars(movie);
+    	
+    	dataChanged = true;
     }
     
 	protected void delete()
@@ -88,7 +98,7 @@ public class MovieController extends Controller
 
     	view.printText("-".repeat(80), true);
     }
-    
+	   
     private void addDirectors(Movie movie)
     {
     	String input = null;
@@ -107,6 +117,24 @@ public class MovieController extends Controller
     	} while (input != "");
     }
     
+    private void removeDirectors(Movie movie)
+    {
+    	String input = null;
+    	
+    	do {
+    		input = view.getString("Enter Director (Blank to finish)");
+    		
+    		if (input != "") {
+    			Director director = App.getDirectors().get(input.toLowerCase());
+    			if (director == null) {
+    				view.error("That director does not exist");
+    			} else {
+    				movie.removeDirector(director);
+    			}
+    		}
+    	} while (input != "");
+    }
+    
     private void addStars(Movie movie)
     {
     	String input = null;
@@ -120,6 +148,24 @@ public class MovieController extends Controller
     				view.error("That actor does not exist");
     			} else {
     				movie.addStar(actor);
+    			}
+    		}
+    	} while (input != "");
+    }
+    
+    private void removeStars(Movie movie)
+    {
+    	String input = null;
+    	
+    	do {
+    		input = view.getString("Enter Actor (Blank to finish)");
+    		
+    		if (input != "") {
+    			Actor actor = App.getActors().get(input.toLowerCase());
+    			if (actor == null) {
+    				view.error("That actor does not exist");
+    			} else {
+    				movie.removeStar(actor);
     			}
     		}
     	} while (input != "");
